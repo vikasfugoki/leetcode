@@ -1,0 +1,40 @@
+class Solution {
+public:
+    
+    bool reverse (int x) {
+       int rev = 0;
+       int temp = x;
+       int count = 0;
+       int n ;
+        while (temp) {
+            count++;
+            temp = temp/10;
+        }
+        
+       temp = x/(int)pow(10, (count+1)/2);
+       x = x%(int)pow(10, (count)/2);
+        
+        while (temp) {
+            rev = rev*10+temp%10;
+            temp = temp/10;
+        }
+        
+        
+        if (rev == x)
+            return true;
+        return false;
+    }
+    
+    bool isPalindrome(int x) {
+        
+        if (x < 0)
+            return false;
+        
+        int rev = reverse (x);
+        
+        if (reverse(x))
+            return true;
+        return false;
+        
+    }
+};
