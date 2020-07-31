@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int i, j, len, temp;
+        len = nums.size();
+        i = 0;
+        j = len-1;
+        
+        while (i<=j) {
+            if (nums[i] == val) {
+                // swap
+                temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                j--;
+            }
+            else {
+                i++;
+            }
+        }
+       // for (i=0; i<len; i++)
+         //   cout << nums[i] << " ";
+        //cout << i+1 << endl;
+        if (len == 0)
+            return 0;
+        return i;
+    }
+};
