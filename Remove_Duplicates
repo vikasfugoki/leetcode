@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& vec) {
+        int len = vec.size();
+        
+        int i, j;
+        i = 0;
+        j = 1;
+        int count = 1;
+        
+        for (j=1; j < len; j++) {
+            if (vec[j-1] == vec[j])
+                continue;
+            if (j-i > 1 && j < len) {
+                vec[++i] = vec[j];
+                //j++;
+                count++;
+            }
+            else {
+                i++;
+                count++;
+            }
+               
+        }
+        //cout << count << endl;
+        if (len == 0)
+            return 0;
+        return count;
+    }
+};
