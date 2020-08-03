@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int len = nums.size();
+        vector<int> amt(len, 0);
+        
+        int i;
+        if (len == 0)
+            return 0;
+        if (len == 1)
+            return nums[0];
+        
+        amt[0] = nums[0];
+        amt[1] = max(amt[0], nums[1]);
+        for (i=2; i<len; i++) {
+            amt[i] = max (nums[i] + amt[i-2], amt[i-1]);
+        }
+        
+        return amt[len-1];
+    }
+};
