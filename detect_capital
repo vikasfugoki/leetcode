@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool detectCapitalUse(string s) {
+        int len = s.length();
+        if (len == 1)
+            return true;
+        
+        if (s[0] >= 65 && s[0] <=90) {
+            if (s[1] >= 65 && s[1] <= 90) {
+                for (int i=2; i<len; i++) {
+                    if (s[i] >= 97)
+                        return false;
+                }
+            }
+            else {
+                for (int i=2; i<len; i++) {
+                    if (s[i] <= 90)
+                        return false;
+                }
+            }
+        }
+        else {
+            for (int i=1; i<len; i++) {
+                if (s[i] <= 90)
+                    return false;
+            }
+        }
+        return true;
+    }
+};
