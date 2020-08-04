@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int len = s.length();
+        int i, j;
+        i=0;
+        j = len-1;
+        for (i=0; i<len; i++) {
+            if (s[i] >= 65  && s[i] <= 90)
+                s[i] = s[i] + 32;
+        }
+        i=0;
+        cout << s << endl;
+        while (i < j) {
+            if ((s[i] == s[j])) {
+                i++;
+                j--;
+            }
+            else {
+                if (((s[i] >= 97 && s[i] <= 122) ||  (s[i] >= 48 && s[i] <= 57) ) && ((s[j] >= 97 && s[j] <= 122)  || (s[j] >= 48 && s[j] <= 57))) { 
+                    cout << s[i] << " " << s[j] << endl;
+                    cout << "i should be here" << endl;
+                    return false;
+                    
+                }
+                else if (( (s[i] >= 97 && s[i] <= 122) ||  (s[i] >= 48 && s[i] <= 57) )){
+                    j--;
+                }
+                else
+                    i++;
+            }
+        }
+        return true;
+        
+    }
+};
