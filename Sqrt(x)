@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int mySqrt(int x) {
+         long int ans;
+         long int l,m, h;
+        
+        l = 1;
+        h = x;
+        
+        if (x == 0 || x == 1)
+            return x;
+        
+        while (l <= h) {
+            
+            m  = (l+h)/2;
+            //cout << m << endl;
+            if (m * m == x)
+            {
+                cout << m << endl;
+                ans = m;
+                return ans;
+            }
+             if (m * m <  x) {
+                //cout << m << endl;
+                l = m+1;
+                ans = m;
+                
+            }
+            else {
+                //cout << "i am here" << m << endl;
+                h = m-1;
+            }
+        }
+        
+        return ans;
+    }
+};
