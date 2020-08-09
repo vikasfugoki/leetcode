@@ -1,0 +1,41 @@
+class Solution {
+public:
+    
+    int centrePalin (string s, int i, int j) {
+        
+       // int low, high;
+        while (i>=0 && j<s.length() && s[i] == s[j]) {
+            i--;
+            j++;
+        }
+        
+        return j-i-1;
+        
+    }
+    string longestPalindrome(string s) {
+        int len = s.length();
+        
+        if (len == 0 || len == 1)
+            return s;
+        
+        int res = 0, low = 0, high = 0;
+        
+        for (int i=0; i<len; i++) {
+            int l1 = centrePalin (s, i, i); // odd length
+            int l2 = centrePalin (s, i, i+1); // even length
+            
+            int l = max (l1, l2);
+            
+            //cout << res << endl;
+            if (l > high - low ) {
+                low = i - (l-1)/2;
+                high = i + l/2;
+                //cout << "i am herr " << endl;
+                cout << low << " " << high << endl;
+            }
+            
+        }
+       // cout << l << endl;
+        return s.substr (low,high-low+1);
+    }
+};
