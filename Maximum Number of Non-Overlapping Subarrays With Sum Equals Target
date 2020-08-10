@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int maxNonOverlapping(vector<int>& nums, int target) {
+        int len = nums.size();
+        if (len == 0)
+            return 0;
+        
+        long int setCount = 0;
+        long int arrsum = 0;
+        set<int> s;
+        s.insert(0);
+        
+        for (int i=0; i<len; i++) {
+        
+            arrsum += nums[i];
+            cout << arrsum << endl;
+             //int prevsum = arrsum;
+            if (s.find(arrsum-target) != s.end()) {
+                setCount++;
+                s.clear();
+                s.insert(0);
+                arrsum = 0;
+            }
+            s.insert(arrsum);
+            
+            /*if (s.find(arrsum-target) != s.end()) {
+                s.clear();
+                s.insert(0);
+                arrsum = 0;
+            }*/
+           /* cout << "setCount:-> " << setCount << endl;
+                set<int>::iterator it;
+                for (it=s.begin(); it!=s.end(); it++) {
+                    cout << *it << " ";
+                }
+                cout << endl;
+                */
+        }
+        
+        
+        return setCount;
+    }
+};
