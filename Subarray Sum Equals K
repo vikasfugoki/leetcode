@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int len = nums.size();
+        map <int, int> dict;
+        
+        dict.insert(pair<int, int>(0, 1));
+        long int setCount = 0;
+        long int arrsum = 0;
+        map<int, int>::iterator itr;
+        for (int i=0; i<len; i++) {
+            arrsum += nums[i];
+                       
+            itr = dict.find(arrsum-k);
+            if (itr != dict.end()) {
+               // cout << itr->first << " " << itr->second << endl;
+                setCount += itr->second;
+            }
+            itr = dict.find(arrsum);
+            if (itr != dict.end()) {
+                itr->second += 1;
+            }
+            else {
+                dict.insert(pair<int, int> (arrsum, 1));
+            }
+           
+        }
+        int s = dict.size();
+        //cout << s;
+        //for (itr=dict.begin(); itr!= dict.end();itr++) {
+          //  cout << itr->first << " " << itr->second << endl;
+        //}
+        return setCount;
+    }
+};
