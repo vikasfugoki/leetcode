@@ -1,0 +1,50 @@
+#include <iostream>
+//#include <bits/stdc++.h>
+#include <string>
+//#include <algorithm>
+#include <sstream>
+using namespace std;
+
+int main() {
+	string str;
+	string s;
+	cin >> str;
+	int len = str.length();
+	
+	
+
+	s = "";
+	unsigned int count = 1;
+
+	for (int i=1; i<len; i++) {
+		if (str[i] == str[i-1]) {
+			count++;
+		}
+		else {
+			s = s + str[i-1];
+			if (count != 1) {
+				ostringstream ss;
+				ss << count;
+				s  = s + ss.str();
+				//cout << s << endl;
+			}
+				//s += std::to_string(count);
+			//cout << s << endl;
+			count = 1;
+			//to_string(4);
+		}
+	}
+
+	s += str[len-1];
+	if (count != 1) {
+		ostringstream ss;
+		ss << count;
+		s = s + ss.str();
+	}
+		
+
+
+	cout << s;	
+
+
+}
