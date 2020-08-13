@@ -1,0 +1,25 @@
+class Solution {
+public:
+    //vector <int> vec(9999, 99999);
+    
+    int dpSquares (vector<int>& vec, int n) {
+         if (n == 0 || n == 1)
+            return n;
+        if (vec[n] != 99999)
+            return vec[n];
+        //int res = 99999;
+        for (int i = 1; i * i <=n ; i++) {
+            
+            int tmp = dpSquares(vec, n-(i*i)) + 1;
+            if (vec[n] > tmp)
+                vec[n] = tmp;
+        }
+        
+        return vec[n];
+    }
+    
+    int numSquares(int n) {
+            vector<int> vec(n+1, 99999);
+        return dpSquares(vec, n);
+    }
+};
