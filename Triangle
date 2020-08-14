@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        int len = triangle.size();
+        
+        // base condition when traingle have no elements
+        if (len == 0)
+            return 0;
+        if (len == 1)
+            return triangle[0][0];
+        
+        int ans = 99999;
+        vector <vector <int>> result (len);
+        result[0].push_back(triangle[0][0]);
+        for (int i=1; i<len; i++) {
+            for (int j=0; j<i+1; j++) {
+                
+                if (j == 0) {
+                    result[i].push_back(result[i-1][j] + triangle[i][j]);  
+                }
+                else if (j == triangle[i].size()-1) {
+                    result[i].push_back(result[i-1][j-1] + triangle[i][j]);
+                }
+                else {
+                    result[i].push_back(min (result[i-1][j-1], result[i-1][j]) + triangle[i][j]);
+                }
+                
+                if (i == len-1 && ans > result[i][j])
+                    ans = result[i][j];
+            }
+        }
+        
+        
+        for (int i=0; i<len; i++) {
+            for (int j=0; j<=i; j++) {
+                cout << result[i][j] << " ";
+            }
+            cout << endl;
+        }
+        return ans;
+    }
+};
