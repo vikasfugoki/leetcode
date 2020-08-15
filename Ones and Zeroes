@@ -1,0 +1,52 @@
+class Solution {
+public:
+    vector<int> cal (string str) {
+        int l = str.length();
+        int i = 0;
+        vector<int> nums(2, 0);
+        while (i<l) {
+            if (str[i] == '0')
+                nums[0]++;
+            else
+                nums[1]++;
+            i++;
+        }
+        
+        return nums;
+    }
+    
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        int len = strs.size();
+        
+        if (len == 0)
+            return 0;
+        
+        vector <vector <vector <int>>> dp (len+1, vector<vector <int>>(m+1, vector<int>(n+1)));
+        
+        
+        
+        for (int i=0; i<len+1; i++) {
+            vector<int> nums(2, 0);
+            //cal (strs[i-1], nums);
+            if (i != 0)
+                nums = cal(strs[i-1]);
+            
+            for (int j=0; j<m+1; j++) {
+                for (int k=0; k<n+1; k++) {
+                    if (i == 0) {
+                        dp[i][j][k] = 0;    
+                    }
+                    else if (j>=nums[0] && k>= nums[1]) {
+                        dp[i][j][k] = max (dp[i-1][j][k], dp[i-1][j-nums[0]][k-nums[1]] + 1);
+                    }
+                    else {
+                        dp[i][j][k] = dp[i-1][j][k];
+                    }
+                    
+                }
+            }
+        }
+        
+        return dp[len][m][n];
+    }
+};
