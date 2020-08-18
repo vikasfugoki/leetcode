@@ -1,0 +1,32 @@
+class Solution {
+public:
+    
+    bool validDistance (vector<int>&position, int M, int m) {
+        int prev = 0;
+        int i , j;
+        for (i=1, j=1; i<m; i++) {
+            while (j < position.size() && position[j] < position[prev] + M) j++;
+            if (j >= position.size()) return false;
+            prev = j;
+        }
+        
+        return true;
+    }
+    
+    int maxDistance(vector<int>& position, int m) {
+        sort(begin(position), end(position));
+        if (m == 2) return position.back() - position[0];
+        
+        int L = 0, R = position.back() - position[0];
+        int M;
+        
+        while (L<=R) {
+            M = (L+R)/2;
+            if (validDistance(position, M, m)) L = M+1;
+            else
+                R = M-1;
+        }
+        
+        return R;
+    }
+};
