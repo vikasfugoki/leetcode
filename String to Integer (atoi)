@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int myAtoi(string str) {
+        int len = str.length();
+        long int ans = 0;
+        int i=0;
+        bool flag = 0;
+        while (str[i] == ' ')
+            i++;
+        
+        if ((str[i] != '-' && str[i] != '+')&& (str[i] < 48 || str[i] > 57)) {
+            //cout << "i am here\n";
+            return 0;
+        }
+        else {
+            //cout << "i am here\n";
+            
+            
+            if (str[i] == '-') {
+                flag = 1;
+                i++;
+            }
+            else if (str[i] == '+')
+                i++;
+               
+            while (str[i] >= 48 && str[i] <= 57) {
+                if (ans*10 + str[i]%48 > 2147483647 && flag == 0)
+                    return 2147483647;
+                else if (ans*10 + str[i]%48 > 2147483648 && flag == 1)
+                    return -2147483648;
+                
+                ans = ans*10+str[i]%48;
+                i++;
+            }    
+        }
+        if (flag == 1)
+            return -1*ans;
+        return ans;
+    }
+};
