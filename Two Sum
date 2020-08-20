@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int len = nums.size();
+        vector <int> numcopy = nums;
+        sort (nums.begin(), nums.end());
+        int front = 0;
+        int back = len-1;
+        vector<int> res(2, 0);
+        
+        while (front < back) {
+            int sum = nums[front] + nums[back];
+            if (sum < target) {
+                front++;
+            }
+            else if (sum > target) {
+                back--;
+            }
+            else {
+                
+                for (int i=0; i<len; i++) {
+                    if (nums[front] == numcopy[i]) {
+                        res[0] = i;
+                    }
+                   /* if (nums[back] == numcopy[i]) {
+                        res[1] = i;
+                    }*/
+                }
+                for (int i=len-1; i>=0; i--) {
+                    if (nums[back] == numcopy[i]) {
+                        res[1] = i;
+                    }
+                   /* if (nums[back] == numcopy[i]) {
+                        res[1] = i;
+                    }*/
+                }
+                
+                break;        
+            }
+        }
+        
+        return res;
+     }
+};
