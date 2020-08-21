@@ -1,0 +1,21 @@
+class Solution {
+public:
+     vector<vector<int>> moves {{-2,-1},{-2,1},{-1,2},{1,2},{2,1},{2,-1},{1,-2},{-1,-2}};
+     vector<vector<vector<double>>> dp =  vector<vector<vector <double>>> (25, vector<vector<double>>(25, vector<double>(1001, 0.0)));
+
+    double knightProbability(int N, int K, int r, int c) {
+               return find(N, K, r, c);
+    }
+    
+    double find(int N, int K, int r, int c) {
+        if (r < 0 || r > N-1 || c < 0 || c > N-1) return 0;
+        if (K==0) return 1;
+        if (dp[r][c][K] != 0.0) return dp[r][c][K];
+        double rate = 0.0;
+        for (int i=0; i<moves.size(); i++) {
+            rate += 0.125*find(N, K-1, r+moves[i][1], c+moves[i][0]);
+        }
+        dp[r][c][K] = rate;
+        return rate;
+    }
+};
