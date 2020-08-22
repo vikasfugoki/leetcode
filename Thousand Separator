@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string thousandSeparator(int n) {
+       string str = to_string(n);
+        if (str.length() <= 3)
+            return str;
+        string s = "";
+        int len = str.length();
+        int i = len%3;
+        if (i==0)
+            i = 3;
+        int j=0;
+       while (i--) {
+           s = s+str[j];
+           j++;
+       }
+        s+=".";
+        i = 3;
+        for (; j<len; ) {
+            
+            if (i == 0) {
+                s += ".";
+                i = 4;
+            }
+            else {
+                s += str[j];
+                j++;
+            }
+            i--;
+        }
+        return s;
+    }
+};
