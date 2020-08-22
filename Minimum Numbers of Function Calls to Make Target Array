@@ -1,0 +1,55 @@
+class Solution {
+public:
+    
+    
+    void divTwo (vector<int>& nums) {
+        int len = nums.size();
+        
+        for (int i=0; i<len; i++) {
+            nums[i] = nums[i]/2;
+        }
+    }
+    
+    int makeEven (vector<int>& nums) {
+        int len = nums.size();
+        int count = 0;
+        for (int i=0; i<len; i++) {
+            if (nums[i]%2) {
+                nums[i]--;
+                count++;
+            }
+                
+        }
+        return count;
+    }
+    
+    bool checkZero (vector<int>& nums) {
+        int len = nums.size();
+        for (int i=0; i<len; i++) {
+            if (nums[i] != 0)
+                return false;
+        }
+        return true;
+    }
+    
+    int minOperations(vector<int>& nums) {
+        int len = nums.size();
+        
+        // make even
+        // divide by 2
+        int count = 0;
+        int flag = 1;
+        while (flag) { 
+            // make_zero
+           count += makeEven(nums);
+           // divide by 2
+            divTwo(nums);
+            count++;
+            if (checkZero(nums))
+                flag = 0;
+            
+        }
+        
+        return count-1;
+    }
+};
