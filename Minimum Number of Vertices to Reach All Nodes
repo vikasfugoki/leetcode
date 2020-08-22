@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
+        vector <int> hash(n, 0);
+        
+        int len = edges.size();
+        
+        for (int i=0; i<len; i++) {
+            hash[edges[i][1]] = 1;
+        }
+        
+        vector<int> count;
+        //int count = 0;
+        for (int i=0; i<n; i++) {
+            if (hash[i] == 0)
+                count.push_back(i);
+        }
+        
+        
+        return count;
+    }
+};
