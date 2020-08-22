@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        //if (rowIndex == 0)
+          //  return vector<int>(0);
+        
+        if (rowIndex == 0)
+            return {1};
+        
+        if (rowIndex == 1)
+            return {1, 1};
+        
+        vector<int> prev = {1, 1};
+        vector<int> cur;
+        rowIndex = rowIndex-1;
+        int r = 3;
+        
+        while (rowIndex--) {
+            vector<int> cur(r, 1);
+            //cur.clear();
+            //cur.assign(r, 1);
+            //cur[0] = 1;
+            //cur[r-1] = 1;
+            
+            for (int i=1; i<r-1; i++) {
+                cur[i] = prev[i-1] + prev[i]; 
+            }
+            r++;
+            prev = cur;
+        }
+        
+        return prev;
+    }
+};
