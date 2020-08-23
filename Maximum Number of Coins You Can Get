@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxCoins(vector<int>& piles) {
+        int len = piles.size();
+        sort(piles.begin(), piles.end());
+        //for (int i=0; i<len; i++)
+          //  cout << piles[i] << " ";
+        len = len/3;
+        
+        
+        int count = 0;
+        int st = piles.size()-2;
+        while (len--) {
+                count += piles[st];
+                st -= 2;
+        }
+        return count;
+    }
+};
