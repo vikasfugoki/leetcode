@@ -1,0 +1,50 @@
+class Solution {
+public:
+    vector<int> mostVisited(int n, vector<int>& rounds) {
+        vector<int> res(n+1, 0);
+        int len = rounds.size();
+        int comp;
+        if (rounds.size() == 0)
+            return res;
+        //res[rounds[0]] = 1;
+        if (rounds[0] == 1) {
+            comp = n;
+        }
+        else {
+            comp = rounds[0]-1;
+        }
+        
+      for (int i=1; i<len; i++) {
+          if (rounds[i-1] > rounds[i]) {
+              for (int j = rounds[i-1]; j<=n; j++)
+                  res[j]++;
+              for (int j = 1; j<rounds[i]; j++)
+                  res[j]++;
+          }
+          else {
+          
+              for (int j=rounds[i-1]; j<rounds[i]; j++) {
+              res[j]++;
+          }
+          
+          }
+      }
+        res[rounds[len-1]]++;
+        
+        int m = 0;
+        for (int i=0; i<n+1; i++) {
+            if (res[i] > m)
+                m = res[i];
+        }
+        
+        vector<int> ans;
+        
+        for (int i=0; i<n+1; i++) {
+            if (res[i] == m)
+                ans.push_back(i);
+        }
+        
+        return ans;
+        
+    }
+};
