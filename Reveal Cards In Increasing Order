@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> deckRevealedIncreasing(vector<int>& deck) {
+        vector<int> hash(deck.size(), -1);
+        sort(deck.begin(), deck.end());
+        int len = deck.size();
+        int k=0;
+        int i=0;
+        int j =0;
+        while (j<len) {
+            if (k%2 == 0 && hash[i] == -1) {
+                hash[i] = deck[j++];
+                k++;
+                i = (i+1)%len;
+            }
+            else if (hash[i] == -1) {
+                i = (i+1)%len;
+                k++;
+            }
+            else {
+                i = (i+1)%len;
+            }
+            //len--;
+        }
+        
+        return hash;
+    }
+};
