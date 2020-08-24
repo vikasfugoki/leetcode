@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int minAddToMakeValid(string S) {
+       //vector<char> vec;
+        stack<char> st;
+        int i=1;
+        int len = S.length();
+        if (len == 0)
+            return 0;
+        st.push(S[0]);
+        while (i < len) {
+            if (!st.empty() &&st.top() == '(' && S[i] == ')') {
+                st.pop();               
+            }
+            else {
+                st.push(S[i]);
+            }
+            //cout << st.size() << endl;
+            i++;
+        }
+        
+        return st.size();
+    }
+};
