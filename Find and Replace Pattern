@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+        vector <string> str;
+       // map<char, char> m;
+        for (int i=0; i<words.size(); i++) {
+            //m.clear();
+            vector<int> hash(26, -1);
+            set<char> s;
+            
+            //cout << words[i] << endl;
+            int j;
+            for (j=0; j<pattern.length(); j++) {
+                if (hash[words[i][j] - 'a'] == -1 && s.find(pattern[j]) == s.end()) {
+                    //m[pattern[j]] = words[i][j] - 'a';
+                    hash[words[i][j] - 'a'] = pattern[j] - 'a';
+                   // cout << m[pattern[j]] << "";
+                    s.insert(pattern[j]);
+                }
+                else if (hash[words[i][j] - 'a'] != pattern[j] - 'a') {
+                    break;
+                }
+               }
+            if (j == words[i].length()) {
+                str.push_back(words[i]);
+                //cout << "i am here";
+            }
+            
+            
+            }
+        return str;
+    }
+};
