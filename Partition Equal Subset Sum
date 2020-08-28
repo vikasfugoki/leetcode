@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        int len = nums.size(); // how the size gfunction of vector works
+        int sum = 0;
+        
+        for (int i=0; i<len; i++) {
+            sum += nums[i];
+        }
+        
+        if (sum%2 == 1)
+            return false;
+        
+        
+        int halfSum = sum/2;
+        
+        vector<vector<int>> dp(len+1, vector<int>(halfSum + 1));
+        
+        for (int i=0; i<len+1; i++) {
+            for (int j=0; j<halfSum+1; j++) {
+                
+                if (i==0) {
+                    dp[i][j] = 0;
+                }
+                else if (j ==0) {
+                    dp[i][j] = 0;
+                }
+                else if (nums[i-1] <= j) {
+                    dp[i][j] = max (dp[i-1][j], nums[i-1] + dp[i-1][j-nums[i-1]]);
+                }
+                else {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+        
+        if (dp[len][halfSum] == halfSum)
+            return true;
+        return false;
+        
+    }
+};
