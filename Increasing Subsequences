@@ -1,0 +1,32 @@
+class Solution {
+public:
+    
+    set<vector<int>> res;
+    
+    void backTrack (vector<int> nums, int index, vector<int> subList) {
+        
+        if (index >= nums.size())
+            return;
+        
+        backTrack (nums, index+1, subList);
+        
+        if (subList.size() == 0 || subList[subList.size()-1] <= nums[index]) {
+            subList.push_back(nums[index]);
+            if (subList.size()>=2)
+            res.insert(subList);
+            backTrack (nums, index+1, subList);
+        }
+    }
+    
+    // function to get the sublist
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+       vector<int> subList;
+        backTrack(nums, 0, subList);
+        vector<vector<int>> ans;
+        
+        for (auto it=res.begin(); it!=res.end(); it++) {
+            ans.push_back(*it);
+        }
+        return ans;
+    }
+};
