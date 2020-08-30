@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int getMaxLen(vector<int>& nums) {
+        int even = -1;
+        int odd = -2;
+        int negative = 0;
+        int res = 0;
+        for (int i=0; i<nums.size(); i++) {
+            if (nums[i] == 0) {
+                even = i;
+                odd = -2;
+                negative = 0;
+            }
+            else {
+                if (nums[i] < 0) negative++;
+                if (nums[i] < 0 && odd == -2) odd = i;
+                if (negative%2 == 0) res = max (res, i - even);
+                else if (odd>-2) res = max (res, i - odd);
+            }
+        }
+        
+        return res;
+    }
+};
