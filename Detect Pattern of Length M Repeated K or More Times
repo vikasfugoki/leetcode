@@ -1,0 +1,36 @@
+class Solution {
+public:
+    
+   
+    
+    bool containsPattern(vector<int>& arr, int m, int k) {
+            
+            int len = arr.size();
+        
+            for (int i=0; i<len-m; i++) {
+                    vector<int> pattern;
+                    for (int j=i; j<i+m && j<len; j++) {
+                        pattern.push_back(arr[j]);
+                    }
+                    int l = 0;
+                    int count = k;
+                    for (int j = i; j<len && l<pattern.size(); j++) {
+                        if (pattern[l]!=arr[j])
+                            break;
+                        l++;
+                        if (l == pattern.size()) {
+                            count--;
+                            l=0;
+                        }
+                          
+                        if (count <= 0)
+                            return true;
+                    }
+                 cout << count << endl; 
+            }
+        
+        return false;
+        }
+        
+  
+};
