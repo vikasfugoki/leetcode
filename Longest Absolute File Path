@@ -1,0 +1,57 @@
+class Solution {
+public:
+    int lengthLongestPath(string input) {
+        //vector <int> levels;
+        map <int, int> levels;
+        int level = 0;
+        int ans = 0;
+         for (int i=0; i<input.length();) {
+            
+            
+            while (i < input.length() && input[i] == '\t'){
+                //level++;
+                
+                    i++;
+                    level++;
+                
+            }
+           /*  
+             while (i <input.length() && input[i] == ' ') {
+                 level++;
+                 i = i+3;
+             }
+             */
+             
+            bool isfile = false;
+            int countChar = 0;
+            while (i < input.length() && input[i] != '\n') {
+                if (input[i] == '.')
+                    isfile = true;
+                countChar++;
+                i++;
+            }
+            
+            if (isfile) {
+                int t;
+                if (levels.size() != 0)
+                 t = levels[level-1] + countChar ;
+                else
+                    t = countChar;
+                ans = max (ans, t);
+            }
+             else
+             {
+                 if (levels.size() != 0)
+                    levels[level] = countChar + 1 + levels[level-1];
+                 else {
+                     levels[0] = countChar + 1;
+                 }
+             }
+             //isfile = false;
+             level = 0;
+             i++;
+        }
+         
+       return ans;
+    }
+};
