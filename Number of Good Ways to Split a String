@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int numSplits(string s) {
+        vector<int>hash(26, 0);
+        vector <int> forward(s.length());
+        vector <int> backward(s.length());
+        int count = 0;
+        for (int i=0; i<s.length(); i++) {
+            if (hash[s[i]-'a'] != 1) {
+                hash[s[i]-'a'] = 1;
+                count++;
+            }
+            forward[i] = count;
+        }
+        count = 0;
+        vector <int> has(26, 0);
+        for (int i=s.length()-1; i>=0; i--) {
+            if (has[s[i] - 'a'] != 1) {
+                has[s[i]-'a'] = 1;
+                count++;
+            }
+            backward[i] = count;
+        }
+        for (int i=0; i<s.length(); i++) {
+            cout << forward[i] << " ";
+        }
+        cout << endl;
+        for (int i=0; i<s.length(); i++) {
+            cout << backward[i] << " ";
+        }
+        cout << endl;
+        
+        
+        int res = 0;
+        
+        for (int i=0; i<s.length()-1; i++) {
+            if (forward[i] == backward[i+1])
+                res++;
+        }
+        
+        return res;
+    }
+};
