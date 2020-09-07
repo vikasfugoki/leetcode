@@ -1,0 +1,57 @@
+class Solution {
+public:
+    int deleteAndEarn(vector<int>& nums) {
+     int len = nums.size();
+        if (len == 0)
+            return 0;
+        if (len == 1)
+            return nums[0];
+        pair<int, int> p;
+        vector<pair<int, int>> arr;
+        
+        sort (nums.begin(), nums.end());
+        int sum = 0;
+       
+        
+        for (int i=0; i<len; i++) {
+               if (i == 0 || nums[i] == nums[i-1]) {
+                   sum += nums[i]; 
+               }
+            else {
+                p.first = nums[i-1];
+                p.second = sum;
+                arr.push_back(p);
+                sum = nums[i];
+            }
+        }
+       
+        p.first = nums[len-1];
+        p.second = sum;
+        arr.push_back(p);
+       vector <int> dp (arr.size()+1); 
+        //cout << arr.size();
+        dp[0] = 0;
+        dp[1] = arr[0].second;
+        for (int i=2; i<=arr.size(); i++) {
+            int temp1 =0, temp2 = 0;
+            if (arr[i-2].first + 1 == arr[i-1].first) {
+                temp1 = arr[i-1].second + dp[i-2];
+            }
+            else {
+                temp2 = arr[i-1].second + dp[i-1];
+            }
+            
+            dp[i] = max (dp[i-1], max(temp1, temp2));
+        }
+        int ans = 0;
+        for (int i=0; i<=arr.size(); i++) {
+            cout << dp[i] << " ";
+            if (ans < dp[i])
+                ans = dp[i];
+        }
+        
+        return ans;
+        //return 0;
+        
+    }
+}; 
