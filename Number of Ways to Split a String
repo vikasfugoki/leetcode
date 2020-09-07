@@ -1,0 +1,58 @@
+class Solution {
+public:
+    int numWays(string s) {
+        long int len = s.length();
+        long int count = 0;
+        for (long int i=0; i<len; i++) {
+            if (s[i] == '1')
+                count++;
+        }
+        
+        if (count%3 != 0)
+            return 0;
+        
+        if (count == 0) {
+            long int su = 1;
+            long int plus = 2;
+            for (int i=1; i<len-2; i++) {
+                su =(su+plus)%1000000007;
+                plus++;
+            }
+            return su;
+        }
+        long int no1 = count/3;
+        long int i;
+        for (i=0; i<len; i++) {
+            if (s[i] == '1') {
+                no1--;
+            }
+            if (no1 == 0) {
+                i++;
+                break;
+            }
+        }
+        
+        no1 = count/3;
+        long int j;
+        for (j=len-1; j>=0; j--) {
+            if (s[j] == '1')
+                no1--;
+            if (no1 == 0) {
+                j--;
+                break;
+            }
+        }
+        
+        long int left0 = 0;
+        long int right0 = 0;
+        while (s[i] != '1') {
+            left0++;
+            i++;
+        }
+        while (s[j] != '1') {
+            right0++;
+            j--;
+        }
+        return (left0+1)*(right0+1)%1000000007;
+    }
+};
