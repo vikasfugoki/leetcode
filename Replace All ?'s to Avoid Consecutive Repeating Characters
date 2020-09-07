@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string modifyString(string s) {
+        int len = s.length();
+        
+        if (len == 1 && s[0] == '?') {
+            return "a";
+        }
+        else if (s[0] == '?') {
+            int temp = 25;
+             do {
+                      
+                      s[0] = 'a' + temp;
+                          temp--;
+                  }while (s[1] == s[0]);
+        }
+        
+        for (int i=1; i<len-1; i++) {
+           if (s[i] == '?') {
+               int temp = 25;
+                  do {
+                      
+                      s[i] = 'a' + temp;
+                          temp--;
+                  }while (s[i-1] == s[i] || s[i] == s[i+1]);
+           }
+        }
+        
+        if (s[len-1] == '?') {
+            int temp = 25;
+             do {
+                      
+                      s[len-1] = 'a' + temp;
+                          temp--;
+                  }while (s[len-1] == s[len-2]);
+        }
+        return s;
+    }
+};
