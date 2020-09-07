@@ -1,0 +1,33 @@
+class Solution {
+public:
+    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
+        vector <unordered_map<int, double>> graph(n);
+        // create the map
+        int i=0;
+        for (auto &it : edges) {
+            graph[it[0]][it[1]] = succProb[i];
+            graph[it[1]][it[0]] = succProb[i++];
+        }
+        
+        vector<double> prob(n, 0.0);
+        queue <int> q;
+        q.push(start);
+        prob[start] = 1.0;
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            
+            for (auto j: graph[node]) {
+                int next = j.first;
+                double pr = j.second;
+                
+                if (prob[node] * pr > prob[next]) {
+                    q.push(next);
+                    prob[next] = prob[node] * pr; 
+                }
+            }
+        }
+        
+        return prob[end];
+    }
+};
