@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> finalPrices(vector<int>& prices) {
+        int len = prices.size();
+        vector<int> res(len);
+        int m;
+        
+        for (int i=0; i<len; i++) {
+            m = prices[i];
+            res[i] = prices[i];
+            for (int j=i+1; j<len; j++) {
+                if (prices[j] <= m) {
+                    res[i] = prices[i] - prices[j];
+                    break;
+                }
+            }
+        }
+        
+        return res;
+        
+    }
+};
