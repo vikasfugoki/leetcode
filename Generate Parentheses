@@ -1,0 +1,40 @@
+class Solution {
+public:
+    
+    void makeString (vector<string>& res, int left, int right, string parent) {
+        if (right == 0)
+            return;
+        if (left == 0) {
+            while (right--) {
+                parent += ')';
+            }
+            res.push_back(parent);
+            return;
+        }
+        
+        if (left == right) {
+            parent += '(';
+            makeString (res, left-1, right, parent);
+        }
+        else {
+            
+            makeString (res, left-1, right, parent+'(');
+            if (right > left)
+            makeString (res, left, right-1, parent+')');
+            //if (left > right)
+            
+            
+        }
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        if (n == 0)
+            return vector<string> ();
+        
+        vector<string> res;
+        
+        makeString (res, n, n, "");
+        
+        return res;
+    }
+};
